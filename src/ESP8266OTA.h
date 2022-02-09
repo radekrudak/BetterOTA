@@ -1,6 +1,6 @@
 /*
     ESP8266OTA.h - ESP8266 OTA Library
-    Created by Mai Porat on %DATE.
+    Created by Mai Porat.
     Released into the public domain.
 */
 
