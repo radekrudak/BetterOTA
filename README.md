@@ -14,7 +14,7 @@ void loop() {
   ESP8266OTA::handle();
 }
 ```
-- ***note:** this begins the serial, with a default baud speed of `115200`. to change the baud speed, continue reading, as its demonstrated below.*
+- ***note:** this begins the serial, with a default baud speed of `115200`. [how to change the baud speed](https://github.com/MaiTheLord/ESP8266OTA/edit/master/README.md#changing-the-serial-baud-speed)*
 
 - ***note:** make sure not to use `delay()`, as this might cause the ESP8266 to miss upload requests! use timers instead.*
 *for example:*
