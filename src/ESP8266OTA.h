@@ -13,17 +13,9 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
-class ESP8266OTAClass {
-    public:
-        void init(const char *ssid, const char *pass = "", const int serialBaud = 115200);
-        void handle();
-
-        static ESP8266OTAClass instance;
-
-    private:
-        ESP8266OTAClass();
-};
-
-ESP8266OTAClass ESP8266OTA = ESP8266OTAClass::instance;
+namespace ESP8266OTA {
+    void init(const char *ssid, const char *pass = "", const int serialBaud = 115200);
+    void handle();
+}
 
 #endif
