@@ -2,6 +2,7 @@
 An ESP8266 Library for easy Over-The-Air code uploading.
 
 ## Usage
+To use the library, you need to call `ESP8266OTA::init()` in the `setup()`, and `ESP8266OTA::handle()` in the `loop()`, like this:
 ```cpp
 #include <ESP8266OTA.h>
 
@@ -13,8 +14,9 @@ void loop() {
   ESP8266OTA::handle();
 }
 ```
+- ***note:** this begins the serial, with a default baud speed of `115200`. you can change the baud speed, as demonstrated below.*
 
-***note:** make sure not to use `delay()`, as this might cause the ESP8266 to miss upload requests! use timers instead.*
+- ***note:** make sure not to use `delay()`, as this might cause the ESP8266 to miss upload requests! use timers instead.*
 *for example:*
 ```cpp
 #include <ESP8266OTA.h>
