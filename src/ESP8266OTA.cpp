@@ -45,6 +45,10 @@ namespace ESP8266OTA {
         ArduinoOTA.begin();
     }
 
+    void init(const char *ssid, int serialBaud) {
+        init(ssid, "", serialBaud);
+    }
+
     void handle() {
         ArduinoOTA.handle();
     }
