@@ -1,5 +1,5 @@
 # ESP8266OTA
-An ESP8266 Library for easy Over-The-Air code uploading. **Under development, not yet ready to use!**
+An ESP8266 Library for easy Over-The-Air code uploading.
 
 ## Usage
 To use the library, you need to call `ESP8266OTA::init()` in the `setup()`, and `ESP8266OTA::handle()` in the `loop()`, like this:
