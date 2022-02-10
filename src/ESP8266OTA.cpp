@@ -7,14 +7,17 @@
 #include "ESP8266OTA.h"
 
 namespace ESP8266OTA {
-    void init(const char *ssid, const char *pass, int serialBaud) {
-        Serial.begin(serialBaud);
+    void init(const char *ssid, const char *pass) {
         WiFi.softAP(ssid, pass, 1, 0, 1);
 
         ArduinoOTA.onStart([]() {
             String type;
             if (ArduinoOTA.getCommand() == U_FLASH) type = "sketch";
             else type = "filesystem"; // U_FS
+
+            if (Serial.available()) {
+                if (Serial.baudRate() != 115200) Serial.updateBaudRate(115200);
+            } else Serial.begin(115200);
 
             // NOTE: if updating FS this would be the place to unmount FS using FS.end()
             Serial.println("Start updating " + type);
@@ -40,10 +43,6 @@ namespace ESP8266OTA {
         });
 
         ArduinoOTA.begin();
-    }
-
-    void init(const char *ssid, int serialBaud) {
-        init(ssid, "", serialBaud);
     }
 
     void handle() {
