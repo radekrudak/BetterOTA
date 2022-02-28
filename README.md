@@ -1,5 +1,5 @@
 # BetterOTA
-Easy to use Over The Air Code Uploading and OTATerminal for the ESP8266 and ESP32.
+Easy to use Over The Air Code Uploading and Terminal for the ESP8266 and ESP32.
 
 This library allows you to easily upload code to the ESP8266 or ESP32 over the air, as well as communicate with it on a terminal over an `HTTP` port.
 
@@ -55,7 +55,7 @@ void loop() {
 ## Uploading code
 To upload code to the board follow these steps:
 1. Connect to the board's access point.
-2. In arduino IDE, choose the network port. it will be named `* at 192.168.4.1`.
+2. In arduino IDE, choose the network port. it will probably be named `* at 192.168.4.1`.
 3. Press the upload button.
 
 ## Using the terminal
@@ -68,7 +68,7 @@ You can change the terminal port by passing the desired port number as an argume
 To make the board send text through the terminal,
 use `OTATerminal.println()` or `OTATerminal.print()`.
 
-to make the bot handle incoming messages, use `OTATerminal::setHandler()` in your `setup()` function, like this:
+to make the bot handle incoming messages, use `OTATerminal.setHandler()` in your `setup()` function, like this:
 ```cpp
 #include <BetterOTA.h>
 
@@ -77,7 +77,7 @@ void setup() {
     OTACodeUploader.begin();
     OTATerminal.begin();
     
-    OTATerminal::setHandler([](const String& message) {
+    OTATerminal.setHandler([](const String& message) {
         // handle incoming messages, for example:
         OTATerminal.println("Got a message: " + message);
     });
