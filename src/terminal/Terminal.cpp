@@ -1,21 +1,56 @@
-/*
-    Terminal.cpp - ESP8266 OTA Library
-    Created by Mai Porat.
-    Released into the public domain.
-*/
-
 #include "Terminal.h"
-#include "TerminalBackend.h"
-#include <utility>
+#include "frontend/index.h"
+#include "frontend/style.h"
+#include "frontend/script.h"
 
-void Terminal::setHandler(std::function<void(String)> handler) {
-    TerminalBackend::handler = std::move(handler);
+Terminal::Terminal(int port) : server{port} {
+    hasStarted = true;
+
+    server.on("/", HTTP_GET, [this]() {
+        if (!isFree()) return;
+        server.send(200, "text/html", INDEX_HTML);
+    });
+
+    server.on("/style.css", HTTP_GET, [this]() {
+        if (!isFree()) return;
+        server.send(200, "text/css", STYLE_CSS);
+    });
+
+    server.on("/script.js", HTTP_GET, [this]() {
+        if (!isFree()) return;
+        server.send(200, "application/javascript", SCRIPT_JS);
+    });
+
+    server.on("/fetch", HTTP_GET, [this]() {
+        if (!isFree()) return;
+        if (outgoing == "") {
+            server.send(204, "text/plain", "Already up to date");
+        } else {
+            server.send(200, "text/strings", outgoing);
+            outgoing = "";
+        }
+    });
+
+    server.on("/send", HTTP_POST, [this]() {
+        if (!isFree()) return;
+        if (server.args() == 0) {
+            server.send(400, "text/plain", "No message");
+        } else {
+            server.send(202, "text/plain", "Message received");
+            handler(server.arg(0));
+        }
+    });
+
+    server.begin();
 }
 
-void Terminal::print(const String& str) {
-    TerminalBackend::outgoing += str;
-}
-
-void Terminal::println(const String& str) {
-    TerminalBackend::outgoing += str + "\n";
+bool Terminal::isFree() {
+    if (currentClient == server.client().remoteIP() || millis() - lastFetch > 1000) {
+        lastFetch = millis();
+        currentClient = server.client().remoteIP();
+        return true;
+    } else {
+        server.send(503, "text", "Another client is currently connected");
+        return false;
+    }
 }
