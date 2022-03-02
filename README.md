@@ -6,9 +6,11 @@ This library allows you to easily upload code to the ESP8266 or ESP32 over the a
 The Code Uploading is designed to be used with the Arduino IDE built-in OTA feature.
 
 ## Installation
-Clone the repo into the `libraries` folder in your sketchbook. usually `Documents/Arduino/libraries`.
+You can install the library using the built-in Library Manager in the Arduino IDE.
 
-Make sure you have the `esp8266` board package installed if using the ESP8266, or the `esp32` board package installed if using the ESP32.
+You can also manually install the library by putting it's folder in the `libraries` folder in your sketchbook. usually `Documents/Arduino/libraries`.
+
+Either way, make sure you have the `esp8266` board package installed if using the ESP8266, or the `esp32` board package installed if using the ESP32.
 
 ## Usage
 ```cpp
