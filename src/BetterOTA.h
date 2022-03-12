@@ -42,8 +42,8 @@ public:
 
     void print(const String& str);
     void println(const String& str);
-
-    String format(String str...);
+    
+    String format(char* str...);
 
     template <typename T>
     inline void print(T value) {
@@ -54,7 +54,7 @@ public:
     inline void println(T value) {
         println(String(value));
     }
-
+    inline String CstringToString(const char* inputString);
 };
 
 extern BetterOTAClass BetterOTA;
