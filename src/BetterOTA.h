@@ -41,7 +41,7 @@ public:
     void setHandler(std::function<void(String)> handler);
     void print(const String& str);
     void println(const String& str);
-
+    String format(String str...);
 };
 
 extern BetterOTAClass BetterOTA;
