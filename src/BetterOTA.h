@@ -54,7 +54,7 @@ public:
     inline void println(T value) {
         println(String(value));
     }
-    inline String CstringToString(const char* inputString);
+    String CstringToString(const char* inputString);
 };
 
 extern BetterOTAClass BetterOTA;

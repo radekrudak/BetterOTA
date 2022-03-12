@@ -85,7 +85,7 @@ String OTATerminalClass::format(char* str...){
     
 }
 // TODO: CHARACTER LIMIT TO PREVENT BUFFER OVERVLOWS... or use better function 
-inline String CstringToString(const char* inputString)
+String OTATerminalClass::CstringToString(const char* inputString)
 {
     char *strPtr = (char*)(void*)inputString; // cheating compiler to convert const char* to char*
     String RetString;
