@@ -114,7 +114,7 @@ void loop() {
 ## Using the format function
 To format a string, use the `Str.format()` function.
 ```cpp
-Str.format("Hello %s! My favourite number is %d", "World", 42); // returns "Hello World! My favourite number is 42"
+Str.format("Hello %s! My favorite number is %d", "World", 42); // returns "Hello World! My favorite number is 42"
 ```
 you can use the `%s` and `%d` format specifiers.
 
