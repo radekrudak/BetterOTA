@@ -10,6 +10,7 @@
 #endif
 
 #include <Arduino.h>
+#include "StrFormat.h"
 #include <functional>
 
 class BetterOTAClass {
@@ -41,7 +42,10 @@ public:
     void setHandler(std::function<void(String)> handler);
 
     void print(const String& str);
-    void println(const String& str);
+
+    inline void println(const String& str) {
+        print(str + "\n");
+    }
 
     template <typename T>
     inline void print(T value) {
@@ -52,10 +56,21 @@ public:
     inline void println(T value) {
         println(String(value));
     }
+
+    template <typename... T>
+    void printf(const String& base, T... args) {
+        print(StrClass::getInstance().format(base, args...));
+    }
+
+    template <typename... T>
+    void printlnf(const String& base, T... args) {
+        println(StrClass::getInstance().format(base, args...));
+    }
 };
 
 extern BetterOTAClass BetterOTA;
 extern OTACodeUploaderClass OTACodeUploader;
 extern OTATerminalClass OTATerminal;
+extern StrClass Str;
 
 #endif //BETTER_OTA_H
