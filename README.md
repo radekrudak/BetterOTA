@@ -1,5 +1,5 @@
 # BetterOTA
-Easy to use Over The Air Code Uploading and Terminal for the ESP8266 and ESP32.
+Easy to use Over-The-Air Code Uploading and Terminal for the ESP8266 and ESP32.
 
 This library allows you to easily upload code to the ESP8266 or ESP32 over the air, as well as communicate with it on a terminal over an `HTTP` port.
 
@@ -11,6 +11,15 @@ You can install the library using the built-in Library Manager in the Arduino ID
 You can also manually install the library by putting it's folder in the `libraries` folder in your sketchbook. usually `Documents/Arduino/libraries`.
 
 Either way, make sure you have the `esp8266` board package installed if using the ESP8266, or the `esp32` board package installed if using the ESP32.
+
+## Features
+- Over-The-Air Code Uploading
+
+
+- Over-The-Air Terminal
+
+
+- String format function
 
 ## Usage
 ```cpp
@@ -67,8 +76,21 @@ then open a browser window, and connect to this address:
 
 You can change the terminal port by passing the desired port number as an argument to `OTATerminal.begin()`.
 
-To make the board send text through the terminal,
-use `OTATerminal.println()` or `OTATerminal.print()`.
+To make the board send text through the terminal, you can use the following functions:
+- `OTATerminal.print("Hello, World!")` prints text to the terminal
+
+
+- `OTATerminal.println("Hello, World!")` prints text to the terminal, with a newline afterwards.
+
+
+- `OTATerminal.printf("Hello, %s!", "World")` prints text to the terminal, with the format function built into it.
+
+
+- `OTATerminal.printlnf("Hello, %s!", "World")` prints text to the terminal, with the format function built into it, with a newline afterwards.
+
+**note: `print()` and `printf()` doesn't print a newline!*
+
+**note: for more information regarding `printf()` and `printlnf()`, see [this](#Using the format function).*
 
 to make the bot handle incoming messages, use `OTATerminal.setHandler()` in your `setup()` function, like this:
 ```cpp
@@ -81,7 +103,7 @@ void setup() {
     
     OTATerminal.setHandler([](const String& message) {
         // handle incoming messages, for example:
-        OTATerminal.println("Got a message: " + message);
+        OTATerminal.printlnf("Got a message: %s", message);
     });
 }
 
@@ -89,3 +111,11 @@ void loop() {
     BetterOTA.handle();
 }
 ```
+## Using the format function
+To format a string, use the `Str.format()` function.
+```cpp
+Str.format("Hello %s! My favourite number is %d", "World", 42); // returns "Hello World! My favourite number is 42"
+```
+you can use the `%s` and `%d` format specifiers.
+
+**note: both `%s` and `%d` function the same way.*
